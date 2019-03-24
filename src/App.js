@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import Display from './Components/Display/Display';
 import './App.css';
 import h2p from 'html2plaintext';
-//import Timer from 'simple-react-timer';
 
-
-//const nums = 10;
 class App extends Component {
 
+// Initializing state
     state = {
     question: undefined,
     answer: undefined,
@@ -24,9 +22,7 @@ class App extends Component {
     const api_call = await fetch(`https://opentdb.com/api.php?amount=01&category=9&type=boolean`);
     const data = await api_call.json();
 
-    console.log(data);
-    console.log(h2p('The word &quot;news&quot; originates'));
-
+    //Updating state after api response
     this.setState({
     userAnswer: undefined,
     question: h2p(data.results[0].question),
@@ -36,6 +32,8 @@ class App extends Component {
     });
 }
 
+//Checking whether answer is correct when user clicks "True" button
+//Increasing or decreasing the score based on correct/incorrect answer
 trueButton = async (anstrue) =>{
 anstrue.preventDefault();
 this.setState({
@@ -59,6 +57,8 @@ this.setState({
 }
 }
 
+//Checking whether answer is correct when user clicks "False" button
+//Increasing or decreasing the score based on correct/incorrect answer
 falseButton = async (ansfalse) =>{
 ansfalse.preventDefault();
 this.setState({
@@ -81,6 +81,7 @@ this.setState({
 }
 }
 
+// rendering Display component
   render() {
     return (
       <div className="App">
